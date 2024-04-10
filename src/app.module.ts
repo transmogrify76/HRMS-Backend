@@ -17,7 +17,7 @@ import { JwtModule } from '@nestjs/jwt';
       secret: 'supratim531',
       signOptions: {
         algorithm: 'HS512',
-        expiresIn: '2m'
+        expiresIn: '120m'
       }
     }),
     EmployeeModule,
