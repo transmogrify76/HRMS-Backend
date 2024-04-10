@@ -25,6 +25,7 @@ export class AttendanceService {
     await employee.save();
 
     return {
+      attId:newAttendance.attId,
       message: `a brand new check-in request is generated for ${employee.username} at ${newAttendance.checkIn} [${newAttendance.attStatus}]`
     };
   }
