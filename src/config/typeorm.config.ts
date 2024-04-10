@@ -6,7 +6,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   port: 3306,
   username: 'root',
   password: 'admin',
-  database: 'hrms',
+  database: 'hrms3',
   entities: [
     __dirname + '/../**/*.entity{.ts,.js}',
   ],
