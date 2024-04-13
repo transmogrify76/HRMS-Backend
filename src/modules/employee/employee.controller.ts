@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UseGuards, Delete,ValidationPipe } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -56,5 +56,9 @@ export class EmployeeController {
     @Body(ValidationPipe) updateEmployeeDto: UpdateEmployeeDto
   ) {
     return await this.employeeService.updateById(empId, updateEmployeeDto);
+  }
+  @Delete(':id')
+  async delete(@Param('id') id: number) {
+    return await this.employeeService.delete(id);
   }
 }

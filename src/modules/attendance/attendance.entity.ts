@@ -16,7 +16,7 @@ export class Attendance extends BaseEntity {
   @Column({ name: 'att_status', type: 'enum', enum: Status })
   attStatus: Status;
 
-  @ManyToOne(() => Employee, employee => employee.attendances)
+  @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
 

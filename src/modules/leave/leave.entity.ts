@@ -19,7 +19,7 @@ export class Leave {
   @Column({ name: 'leave_status', type: 'enum', enum: Status })
   leaveStatus: Status;
 
-  @ManyToOne(() => Employee, employee => employee.leaves)
+  @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
 
