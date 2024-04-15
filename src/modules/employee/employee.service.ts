@@ -10,9 +10,11 @@ import { RoleType } from 'src/enums/role-type.enum';
 import { LoginDto } from './dto/login.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
+import { log } from 'console';
 
 @Injectable()
 export class EmployeeService {
+  leaveRepository: any;
   constructor(
     @InjectRepository(Employee)
     private readonly employeeRepository: Repository<Employee>,
@@ -119,6 +121,24 @@ export class EmployeeService {
 
     return {
       message: `employee ${employee.username} (${employee.firstName} ${employee.lastName}) updated successfully`
+    };
+  }
+  async delete(empId: number) {
+    const employeeToRemove = await this.employeeRepository.findOne({
+      where: { empId },
+      relations: ['leaves', 'attendances'],
+    });
+    if (!employeeToRemove) {
+      throw new NotFoundException(`Employee with ID ${empId} not found`)
+    }
+    try {
+      await employeeToRemove.remove();
+    } catch (error) {
+      throw new Error(`Error deleting employee: ${error.message}`);
+    }
+
+    return {
+      message: `Employee ${employeeToRemove.username} (${employeeToRemove.firstName} ${employeeToRemove.lastName}) deleted successfully`,
     };
   }
 }
