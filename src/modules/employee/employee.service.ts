@@ -38,7 +38,7 @@ export class EmployeeService {
   }
 
   async register(registerDto: RegisterDto) {
-    const { firstName, lastName, email, username, password } = registerDto;
+    const { firstName, lastName, email, username, password,joiningDate } = registerDto;
     const { role } = await this.roleService.findByRoleType(RoleType.EMPLOYEE);
 
     const newEmployee = new Employee();
@@ -47,6 +47,7 @@ export class EmployeeService {
     newEmployee.email = email;
     newEmployee.username = username;
     newEmployee.password = password;
+    newEmployee.joiningDate = joiningDate;
     newEmployee.role = role;
 
     await newEmployee.save();
@@ -123,6 +124,7 @@ export class EmployeeService {
       message: `employee ${employee.username} (${employee.firstName} ${employee.lastName}) updated successfully`
     };
   }
+
   async delete(empId: number) {
     const employeeToRemove = await this.employeeRepository.findOne({
       where: { empId },
