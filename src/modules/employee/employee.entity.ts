@@ -25,6 +25,9 @@ export class Employee extends BaseEntity {
   @Column()
   password: string;
 
+  @Column({ name: 'joing_date' })
+  joiningDate:string;
+
   @ManyToOne(() => Role, role => role.employees)
   @JoinColumn({ name: 'role_id' })
   role: Role;
