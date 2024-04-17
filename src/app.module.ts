@@ -8,6 +8,7 @@ import { PayrollModule } from './modules/payroll/payroll.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { JwtModule } from '@nestjs/jwt';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { JwtModule } from '@nestjs/jwt';
     EmployeeModule,
     AttendanceModule,
     LeaveModule,
-    PayrollModule
+    PayrollModule,
+    MailerModule
   ],
   controllers: [AppController],
   providers: [AppService],
