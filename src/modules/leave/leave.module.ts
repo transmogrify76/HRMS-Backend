@@ -4,13 +4,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Leave } from './leave.entity';
 import { LeaveController } from './leave.controller';
 import { EmployeeModule } from '../employee/employee.module';
+import { MailerService } from '../mailer/mailer.service';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Leave]),
-    EmployeeModule
+    EmployeeModule,
   ],
-  providers: [LeaveService],
+  providers: [LeaveService , MailerService],
   controllers: [LeaveController]
 })
 export class LeaveModule { }

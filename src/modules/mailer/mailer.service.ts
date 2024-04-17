@@ -55,13 +55,7 @@ export class MailerService {
             from,
             to,
             subject,
-            html: `<h1>Employee Details</h1>
-            <p>Name: ${employeeDetails.employee.firstName} ${employeeDetails.employee.lastName}</p>
-            <p>Email: ${employeeDetails.employee.email}</p>
-            <p>Joining Date: ${employeeDetails.employee.joiningDate}</p>
-            <p> ${employeeDetails.employee.username}</p>
-            <hr />
-            `,
+            html: htmlBody,
         };
 
         return transporter.sendMail(mailOptions);

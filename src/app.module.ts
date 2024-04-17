@@ -8,7 +8,7 @@ import { PayrollModule } from './modules/payroll/payroll.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { JwtModule } from '@nestjs/jwt';
-import { MailerModule } from './mailer/mailer.module';
+import { MailerModule } from './modules/mailer/mailer.module';
 
 @Module({
   imports: [

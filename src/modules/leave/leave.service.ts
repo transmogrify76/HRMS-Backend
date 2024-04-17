@@ -38,6 +38,7 @@ export class LeaveService {
   }
 
   async findById(leaveId: number) {
+    const { employee } = await this.employeeService.findById(leaveId);
     const leave = await this.leaveRepository.findOne({
       where: {
         leaveId
@@ -49,6 +50,7 @@ export class LeaveService {
       throw new NotFoundException(`no leave exists with leaveId ${leaveId}`);
     } else {
       return {
+        employee,
         leave
       };
     }

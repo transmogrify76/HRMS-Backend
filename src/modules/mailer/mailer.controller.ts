@@ -1,5 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { MailerService } from './mailer.service';
+import { log } from 'console';
 
 @Controller('mailer')
 export class MailerController {
@@ -11,6 +12,7 @@ export class MailerController {
 
         try {
             await this.mailerService.sendEmail(from, to, subject, htmlBody, employeeId);
+            console.log('Email sent successfully');
             return 'Test email sent successfully';
         } catch (error) {
             return 'Error sending test email: ' + error.message;
