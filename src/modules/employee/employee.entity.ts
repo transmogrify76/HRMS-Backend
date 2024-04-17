@@ -1,9 +1,10 @@
 import * as bcrypt from 'bcrypt';
-import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Role } from './role/role.entity';
 import { Attendance } from '../attendance/attendance.entity';
 import { Leave } from '../leave/leave.entity';
 import { Payroll } from '../payroll/payroll.entity';
+import { Employeedetails } from '../employeedetails/details.entity';
 
 @Entity({ name: 'employees' })
 export class Employee extends BaseEntity {
@@ -37,6 +38,9 @@ export class Employee extends BaseEntity {
 
   @OneToMany(() => Leave, leave => leave.employee)
   leaves: Leave[];
+
+  @OneToOne(() => Employeedetails, employeedetails => employeedetails.employee)
+  employeedetails: Employeedetails[];
 
   @OneToMany(() => Payroll, payroll => payroll.employee)
   payrolls: Payroll[];

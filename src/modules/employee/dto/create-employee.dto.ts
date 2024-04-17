@@ -43,4 +43,7 @@ export class CreateEmployeeDto {
   @IsNumber()
   @IsNotEmpty()
   role: Role;
+  
+  @IsString()
+  joiningDate:string;
 }
