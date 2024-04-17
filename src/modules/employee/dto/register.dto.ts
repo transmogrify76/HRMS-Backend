@@ -25,6 +25,5 @@ export class RegisterDto {
   password: string;
 
   @IsString()
-  @IsNotEmpty()
   joiningDate: string;
 }
