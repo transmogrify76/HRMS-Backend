@@ -16,8 +16,8 @@ export class LeaveService {
   ) { }
 
   async create(createLeaveDto: CreateLeaveDto) {
-    const { employee } = await this.employeeService.findById(+createLeaveDto.employee);
-    createLeaveDto.employee = employee;
+    const { employee } = await this.employeeService.findById(+createLeaveDto.empId);
+    // createLeaveDto.empId = employee;
     createLeaveDto['leaveStatus'] = Status.PENDING;
 
     const newLeave = await this.leaveRepository.save(createLeaveDto);
@@ -38,6 +38,7 @@ export class LeaveService {
   }
 
   async findById(leaveId: number) {
+    const { employee } = await this.employeeService.findById(leaveId);
     const leave = await this.leaveRepository.findOne({
       where: {
         leaveId
@@ -49,6 +50,7 @@ export class LeaveService {
       throw new NotFoundException(`no leave exists with leaveId ${leaveId}`);
     } else {
       return {
+        employee,
         leave
       };
     }

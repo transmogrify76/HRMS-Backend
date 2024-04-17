@@ -8,8 +8,8 @@ import { PayrollModule } from './modules/payroll/payroll.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { JwtModule } from '@nestjs/jwt';
+import { MailerModule } from './modules/mailer/mailer.module';
 import { EmployeedetailsModule } from './modules/employeedetails/details.module';
-import { MailerModule } from './mailer/mailer.module';
 
 
 @Module({
