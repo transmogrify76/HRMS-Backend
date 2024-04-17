@@ -10,33 +10,36 @@ export class LeaveController {
   constructor(
     private readonly leaveService: LeaveService , 
     private readonly employeeService : EmployeeService , 
-    private mailerService : MailerService
+    private readonly mailerService : MailerService
   ) { }
 
   @Post() 
   async create(
     @Body(ValidationPipe) createLeaveDto: CreateLeaveDto
   ) {
+    
     const createdLeave =  await this.leaveService.create(createLeaveDto);
-
+    
     // Admin ko email bhi to bhejnaaa haiiii 
-    await this.sendLeaveApplication(createdLeave);
+    await this.sendLeaveApplication(createLeaveDto);
     return createdLeave;
   }
 
-  private async sendLeaveApplication(leave : any){
-    const {empId, reason} = leave;
+  private async sendLeaveApplication(createLeaveDto: CreateLeaveDto){
+    const {empId} = createLeaveDto;
 
     try{
       const employee = await this.employeeService.findById(empId);
-
+      console.log('============================' , employee);
+      
       const from = 'transmogrifyhrms@gmail.com';
       const to = 'transev76@gmail.com';
       const subject = 'Leave Application Received!!!';
-      const htmlBody = `<p>Hello Admin,</p>
-      <p>A leave application has been received from ${employee.employee.firstName} ${employee.employee.lastName} <br>
-      (Employee ID: ${employee.employee.empId}).</p>
-      <p>Reason: ${leave.reason}</p>
+      const htmlBody = `<p>Hello Sir,</p>
+      <p>A leave application has been received from ${employee.employee.firstName}${employee.employee.lastName} <br>
+      (Employee ID: ${createLeaveDto.empId}).</p>
+      <p>Reason: ${createLeaveDto.reason}</p>
+      <p>Employee mailID: ${employee.employee.email}</p>
       <p>Please take necessary action.</p>`;
 
 

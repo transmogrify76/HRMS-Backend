@@ -16,8 +16,8 @@ export class LeaveService {
   ) { }
 
   async create(createLeaveDto: CreateLeaveDto) {
-    const { employee } = await this.employeeService.findById(+createLeaveDto.employee);
-    createLeaveDto.employee = employee;
+    const { employee } = await this.employeeService.findById(+createLeaveDto.empId);
+    // createLeaveDto.empId = employee;
     createLeaveDto['leaveStatus'] = Status.PENDING;
 
     const newLeave = await this.leaveRepository.save(createLeaveDto);
