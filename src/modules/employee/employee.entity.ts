@@ -39,7 +39,7 @@ export class Employee extends BaseEntity {
   @OneToMany(() => Leave, leave => leave.employee)
   leaves: Leave[];
 
-  @OneToOne(() => Employeedetails, employeedetails => employeedetails.employee)
+  @OneToMany(() => Employeedetails, employeedetails => employeedetails.employee)
   employeedetails: Employeedetails[];
 
   @OneToMany(() => Payroll, payroll => payroll.employee)
