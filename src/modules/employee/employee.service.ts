@@ -102,7 +102,7 @@ export class EmployeeService {
       where: {
         empId
       },
-      relations: ['role', 'leaves', 'attendances']
+      relations: ['role', 'leaves', 'attendances','employeedetails']
     });
 
     if (!employee) {
