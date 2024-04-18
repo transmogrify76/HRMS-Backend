@@ -2,11 +2,12 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length } fro
 import { Role } from "../role/role.entity";
 
 /*
-const payload = {
-  "firstName": "Angshuman",
-  "lastName": "Mondal",
-  "email": "angshuman.mondal@gmail.com",
-  "username": "angshuman123",
+const payload ={
+  "firstName": "Shubham",
+  "lastName": "Prasad",
+  "email": "shub.prasad@gmail.com",
+  "username": "Shub1234",
+  "joiningDate" : "2024-01-29",
   "password": "Test@2024",
   "role": 1
 }

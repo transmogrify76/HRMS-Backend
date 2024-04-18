@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsDate, IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { Employee } from "src/modules/employee/employee.entity";
 
 /*
@@ -33,4 +33,8 @@ export class CreateLeaveDto {
   @IsNumber()
   @IsNotEmpty()
   empId: number;
+
+  @IsEmail()
+  @IsNotEmpty()
+  employeeEmail: string;
 }

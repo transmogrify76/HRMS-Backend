@@ -4,7 +4,6 @@ import { Leave } from './leave.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { EmployeeService } from '../employee/employee.service';
-import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { Status } from 'src/enums/status.enum';
 
 @Injectable()
@@ -17,6 +16,10 @@ export class LeaveService {
 
   async create(createLeaveDto: CreateLeaveDto) {
     const { employee } = await this.employeeService.findById(+createLeaveDto.empId);
+
+     // Fetch employee's email and store it in CreateLeaveDto
+    createLeaveDto.employeeEmail = employee.email;
+
     // createLeaveDto.empId = employee;
     createLeaveDto['leaveStatus'] = Status.PENDING;
 
@@ -37,8 +40,8 @@ export class LeaveService {
     };
   }
 
-  async findById(leaveId: number) {
-    const { employee } = await this.employeeService.findById(leaveId);
+  async findById(leaveId: number , empId: number) {
+    const { employee } = await this.employeeService.findById(empId);
     const leave = await this.leaveRepository.findOne({
       where: {
         leaveId
@@ -69,19 +72,36 @@ export class LeaveService {
     if (!leaves.length) {
       throw new NotFoundException(`no leave exists for employee ${employee.username} (${employee.firstName} ${employee.lastName})`);
     } else {
+      const empId = employee.empId;
       return {
-        leaves
+        leaves,
+        empId
       };
     }
   }
 
-  async updateById(leaveId: number, updateLeaveDto: UpdateLeaveDto) {
-    const { leave } = await this.findById(leaveId);
-    await this.leaveRepository.update(leaveId, updateLeaveDto);
-    const updatedLeave = await this.findById(leaveId);
+  // async updateById(leaveId: number, empId: number, updateLeaveDto: UpdateLeaveDto) {
+  //   const { leave, employee  } = await this.findById(leaveId, empId);
+    
+  //   console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[' , employee,empId);
+    
+  //   await this.leaveRepository.update(leaveId, updateLeaveDto);
+  //   const updatedLeave = await this.findById(leaveId, empId);
+  
+  //   return {
+  //     message: `leave request of ${leave.employee.username} updated successfully [${updatedLeave.leave.leaveStatus}]`
+  //   };
+  // }
 
-    return {
-      message: `leave request of ${leave.employee.username} updated successfully [${updatedLeave.leave.leaveStatus}]`
-    };
+  async updateById(empId:number,leaveId: number, leaveStatus:string) {
+    const leave = await this.leaveRepository.findOne({
+      where: { employee: { empId: empId }, leaveId: leaveId },
+    });
+    if (!leave) {
+      throw new Error('Attendance record not found');
+    }
+    leave.leaveStatus = leaveStatus;
+    return this.leaveRepository.save(leave);
   }
+  
 }
