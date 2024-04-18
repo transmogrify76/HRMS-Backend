@@ -32,5 +32,5 @@ export class CreateLeaveDto {
 
   @IsNumber()
   @IsNotEmpty()
-  employee: Employee;
+  empId: number;
 }
