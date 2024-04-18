@@ -15,6 +15,9 @@ export class Employeedetails {
   @Column({ name: 'IFSC_code_no' })
   IFSCno: string;
 
+  @Column({ name: 'pan_no' })
+  panNo: string;
+
   @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
