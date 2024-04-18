@@ -31,4 +31,7 @@ export class Leave {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @Column({ name: 'employee_email', type: 'varchar', nullable: false }) 
+  employeeEmail: string; 
 }

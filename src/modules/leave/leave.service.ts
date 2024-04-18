@@ -17,6 +17,10 @@ export class LeaveService {
 
   async create(createLeaveDto: CreateLeaveDto) {
     const { employee } = await this.employeeService.findById(+createLeaveDto.empId);
+
+     // Fetch employee's email and store it in CreateLeaveDto
+    createLeaveDto.employeeEmail = employee.email;
+
     // createLeaveDto.empId = employee;
     createLeaveDto['leaveStatus'] = Status.PENDING;
 
@@ -78,7 +82,10 @@ export class LeaveService {
   }
 
   async updateById(leaveId: number, empId: number, updateLeaveDto: UpdateLeaveDto) {
-    const { leave } = await this.findById(leaveId, empId);
+    const { leave, employee  } = await this.findById(leaveId, empId);
+    
+    console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[' , employee,empId);
+    
     await this.leaveRepository.update(leaveId, updateLeaveDto);
     const updatedLeave = await this.findById(leaveId, empId);
   

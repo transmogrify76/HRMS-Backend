@@ -79,12 +79,20 @@ async updateById(
 
 
 private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
+  console.log('++++++++++===============================================' , leaveId , empId);
+  
+  const { leave, employee } = await this.leaveService.findById(leaveId, empId);
+  const employeeEmail = leave.employeeEmail;
+  const { firstName, lastName } = employee;
+  console.log('++++++++++' , employee);
+  
   // Prepare email content
-  const from = 'transmogrifyhrms@gmail.com';
-  const to = 'transev76@gmail.com';
+  const from = 'transev76@gmail.com';
+  const to = employeeEmail;
   const subject = 'Leave Request Updated';
-  const htmlBody = `<p>Hello Admin,</p>
-                    <p>The leave request (ID: ${leaveId}) has been updated.</p>
+  const htmlBody = `<p>Hello Sir/Ma'am,</p>
+                    <p>The leave request (ID: ${leaveId}) has been updated. <br>
+                    Name: ${firstName} ${lastName}</p>
                     <p>Please review the updated leave details.</p>`;
 
   // Send email
