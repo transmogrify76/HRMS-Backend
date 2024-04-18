@@ -37,9 +37,6 @@ export class EmployeedetailService {
 }
 
 
-
-
-
    async findAll() {
     const employeedetails = await this.employeedetailsRepository.find();
 

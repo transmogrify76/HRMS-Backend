@@ -128,7 +128,7 @@ export class EmployeeService {
   async delete(empId: number) {
     const employeeToRemove = await this.employeeRepository.findOne({
       where: { empId },
-      relations: ['leaves', 'attendances'],
+      relations: ['leaves', 'attendances','employeedetails'],
     });
     if (!employeeToRemove) {
       throw new NotFoundException(`Employee with ID ${empId} not found`)
