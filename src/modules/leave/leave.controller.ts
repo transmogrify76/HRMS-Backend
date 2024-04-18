@@ -30,7 +30,7 @@ export class LeaveController {
 
     try{
       const employee = await this.employeeService.findById(empId);
-      console.log('============================' , employee);
+      // console.log('============================' , employee);
       
       const from = 'transmogrifyhrms@gmail.com';
       const to = 'transev76@gmail.com';
@@ -63,11 +63,33 @@ export class LeaveController {
     }
   }
 
-  @Patch(':id')
-  async updateById(
-    @Param('id', ParseIntPipe) leaveId: number,
-    @Body(ValidationPipe) updateLeaveDto: UpdateLeaveDto
-  ) {
-    return await this.leaveService.updateById(leaveId, updateLeaveDto);
-  }
+@Patch(':id')
+async updateById(
+  @Param('id', ParseIntPipe) leaveId: number,
+  @Body() payload: any
+) {
+  const empId = payload.empId; // Extract empId from the payload
+  const result = await this.leaveService.updateById(leaveId, empId, payload); // Pass empId to the service method
+
+  // Send email notification if the update was successful
+  await this.sendLeaveUpdateEmail(leaveId, empId);
+
+  return result;
+}
+
+
+private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
+  // Prepare email content
+  const from = 'transmogrifyhrms@gmail.com';
+  const to = 'transev76@gmail.com';
+  const subject = 'Leave Request Updated';
+  const htmlBody = `<p>Hello Admin,</p>
+                    <p>The leave request (ID: ${leaveId}) has been updated.</p>
+                    <p>Please review the updated leave details.</p>`;
+
+  // Send email
+  await this.mailerService.sendEmail(from, to, subject, htmlBody, empId);
+}
+
+  
 }

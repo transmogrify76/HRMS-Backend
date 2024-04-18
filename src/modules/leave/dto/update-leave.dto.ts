@@ -1,6 +1,6 @@
 import { PartialType } from "@nestjs/mapped-types";
 import { CreateLeaveDto } from "./create-leave.dto";
-import { IsEnum, IsNotEmpty, IsOptional } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 import { Status } from "src/enums/status.enum";
 
 export class UpdateLeaveDto extends PartialType(CreateLeaveDto) {
@@ -8,4 +8,5 @@ export class UpdateLeaveDto extends PartialType(CreateLeaveDto) {
   @IsNotEmpty()
   @IsOptional()
   leaveStatus: Status;
+
 }
