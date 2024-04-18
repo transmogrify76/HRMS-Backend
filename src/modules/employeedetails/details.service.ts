@@ -32,12 +32,9 @@ export class EmployeedetailService {
     employee.employeedetails.push(newDetails);
     await employee.save();
     return {
-      message: `A brand new leave request has been generated for ${employee.username}, details uploaded`
+      message: `Employee details uploaded for ${employee.username}`
     };
 }
-
-
-
 
 
    async findAll() {
