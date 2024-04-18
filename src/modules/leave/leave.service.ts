@@ -37,8 +37,8 @@ export class LeaveService {
     };
   }
 
-  async findById(leaveId: number) {
-    const { employee } = await this.employeeService.findById(leaveId);
+  async findById(leaveId: number , empId: number) {
+    const { employee } = await this.employeeService.findById(empId);
     const leave = await this.leaveRepository.findOne({
       where: {
         leaveId
@@ -69,19 +69,22 @@ export class LeaveService {
     if (!leaves.length) {
       throw new NotFoundException(`no leave exists for employee ${employee.username} (${employee.firstName} ${employee.lastName})`);
     } else {
+      const empId = employee.empId;
       return {
-        leaves
+        leaves,
+        empId
       };
     }
   }
 
-  async updateById(leaveId: number, updateLeaveDto: UpdateLeaveDto) {
-    const { leave } = await this.findById(leaveId);
+  async updateById(leaveId: number, empId: number, updateLeaveDto: UpdateLeaveDto) {
+    const { leave } = await this.findById(leaveId, empId);
     await this.leaveRepository.update(leaveId, updateLeaveDto);
-    const updatedLeave = await this.findById(leaveId);
-
+    const updatedLeave = await this.findById(leaveId, empId);
+  
     return {
       message: `leave request of ${leave.employee.username} updated successfully [${updatedLeave.leave.leaveStatus}]`
     };
   }
+  
 }
