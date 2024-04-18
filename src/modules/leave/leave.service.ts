@@ -4,7 +4,6 @@ import { Leave } from './leave.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { EmployeeService } from '../employee/employee.service';
-import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { Status } from 'src/enums/status.enum';
 
 @Injectable()
@@ -81,17 +80,28 @@ export class LeaveService {
     }
   }
 
-  async updateById(leaveId: number, empId: number, updateLeaveDto: UpdateLeaveDto) {
-    const { leave, employee  } = await this.findById(leaveId, empId);
+  // async updateById(leaveId: number, empId: number, updateLeaveDto: UpdateLeaveDto) {
+  //   const { leave, employee  } = await this.findById(leaveId, empId);
     
-    console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[' , employee,empId);
+  //   console.log('[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[' , employee,empId);
     
-    await this.leaveRepository.update(leaveId, updateLeaveDto);
-    const updatedLeave = await this.findById(leaveId, empId);
+  //   await this.leaveRepository.update(leaveId, updateLeaveDto);
+  //   const updatedLeave = await this.findById(leaveId, empId);
   
-    return {
-      message: `leave request of ${leave.employee.username} updated successfully [${updatedLeave.leave.leaveStatus}]`
-    };
+  //   return {
+  //     message: `leave request of ${leave.employee.username} updated successfully [${updatedLeave.leave.leaveStatus}]`
+  //   };
+  // }
+
+  async updateById(empId:number,leaveId: number, leaveStatus:string) {
+    const leave = await this.leaveRepository.findOne({
+      where: { employee: { empId: empId }, leaveId: leaveId },
+    });
+    if (!leave) {
+      throw new Error('Attendance record not found');
+    }
+    leave.leaveStatus = leaveStatus;
+    return this.leaveRepository.save(leave);
   }
   
 }

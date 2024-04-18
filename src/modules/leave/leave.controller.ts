@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
 import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
-import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { EmployeeService } from '../employee/employee.service';
 import { MailerService } from '../mailer/mailer.service';
 
@@ -63,20 +62,36 @@ export class LeaveController {
     }
   }
 
-@Patch(':id')
-async updateById(
-  @Param('id', ParseIntPipe) leaveId: number,
-  @Body() payload: any
-) {
-  const empId = payload.empId; // Extract empId from the payload
-  const result = await this.leaveService.updateById(leaveId, empId, payload); // Pass empId to the service method
+  @Patch(':empId/:leaveId')
+  async markOut(
+    @Param('empId') empId: number,
+    @Param('leaveId') leaveId: number,
+    @Body('leaveStatus') leaveStatus: string, 
+  ) {
+    const result = await this.leaveService.updateById(empId, leaveId, leaveStatus);
 
-  // Send email notification if the update was successful
-  await this.sendLeaveUpdateEmail(leaveId, empId);
+    // Send email notification if the update was successful
+    await this.sendLeaveUpdateEmail(leaveId, empId);
 
-  return result;
-}
+    return result;
+  }
 
+
+
+
+// @Patch(':id')
+// async updateById(
+//   @Param('id', ParseIntPipe) leaveId: number,
+//   @Body() payload: any
+// ) {
+//   const empId = payload.empId; // Extract empId from the payload
+//   const result = await this.leaveService.updateById(leaveId, empId, payload); // Pass empId to the service method
+
+//   // Send email notification if the update was successful
+//   await this.sendLeaveUpdateEmail(leaveId, empId);
+
+//   return result;
+// }
 
 private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
   console.log('++++++++++===============================================' , leaveId , empId);

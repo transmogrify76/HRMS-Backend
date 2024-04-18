@@ -16,8 +16,8 @@ export class Leave {
   @Column({ type: 'text', nullable: false })
   reason: string
 
-  @Column({ name: 'leave_status', type: 'enum', enum: Status })
-  leaveStatus: Status;
+  @Column({ name: 'leave_status', nullable: true })
+  leaveStatus: string;
 
   @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
@@ -34,4 +34,6 @@ export class Leave {
 
   @Column({ name: 'employee_email', type: 'varchar', nullable: false }) 
   employeeEmail: string; 
+
+
 }
