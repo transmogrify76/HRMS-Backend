@@ -12,19 +12,12 @@ payload{
 */
 export class Employeedetailsdto {
 
- @IsString()
- adhaarCardNo: string;
 
   @IsString()
   bankAccountNo: string;
 
   @IsString()
   IFSCno: string;
-
-
-  @IsString()
-  panNo: string;
-
 
   @IsNumber()
   @IsNotEmpty()

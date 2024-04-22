@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Employee } from "../employee/employee.entity";
 
 @Entity({ name: 'payrolls' })
@@ -6,34 +6,26 @@ export class Payroll extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'payroll_id' })
   payrollId: number;
 
-  @Column({ type: 'varchar', nullable: false })
-  month: string;
+  @Column({ name: 'basic_Salary', nullable: false })
+  basicSalary: number;
 
-  @Column({ type: 'varchar', nullable: false })
-  year: string;
+  @Column({ name: 'HRA', nullable: false })
+  HRA: number;
 
-  @Column({ name: 'basic_salary', type: 'varchar', nullable: false })
-  basicSalary: string;
+  @Column({ name: 'City_Allowance',  nullable: false })
+  CityAllowance: number;
 
-  @Column({ type: 'varchar' })
-  allowances: string;
+  @Column({ name: 'Con_Allowance', nullable: false })
+  Con_Allowance: number;
 
-  @Column({ type: 'varchar' })
-  deductions: string;
+  @Column({ name: 'Other', nullable: false })
+  Other: number;
 
-  @Column({ name: 'net_salary', type: 'varchar', nullable: false })
-  netSalary: string;
 
-  @ManyToOne(() => Employee, employee => employee.payrolls)
+  @Column({ name: 'Total_Earnings', nullable: false })
+  Total_Earnings: number;
+
+  @OneToOne(() => Employee, employee => employee.payrolls,{ onDelete: 'CASCADE' })
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
-
-  @Column({ name: 'is_active', type: 'boolean', default: true, nullable: false })
-  isActive: boolean;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 }

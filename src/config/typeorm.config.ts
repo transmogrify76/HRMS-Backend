@@ -32,10 +32,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   port: 3306,
   username: 'root',
   password: 'admin',
-  database: 'hrms',
+  database: 'hrms5',
   entities: [
     __dirname + '/../**/*.entity{.ts,.js}',
   ],
-  synchronize: false,
-  logging: true
+  synchronize: false, 
+  logging: true,
 };
