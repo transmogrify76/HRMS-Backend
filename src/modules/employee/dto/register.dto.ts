@@ -26,4 +26,16 @@ export class RegisterDto {
 
   @IsString()
   joiningDate: string;
+
+  @IsString()
+  @IsNotEmpty()
+  aadhaarNo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  panNo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  mobileNo: string;
 }

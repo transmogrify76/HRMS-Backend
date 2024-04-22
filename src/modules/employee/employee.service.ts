@@ -38,7 +38,7 @@ export class EmployeeService {
   }
 
   async register(registerDto: RegisterDto) {
-    const { firstName, lastName, email, username, password,joiningDate } = registerDto;
+    const { firstName, lastName, email, username, password, joiningDate, mobileNo, aadhaarNo, panNo } = registerDto;
     const { role } = await this.roleService.findByRoleType(RoleType.EMPLOYEE);
 
     const newEmployee = new Employee();
@@ -49,6 +49,9 @@ export class EmployeeService {
     newEmployee.password = password;
     newEmployee.joiningDate = joiningDate;
     newEmployee.role = role;
+    newEmployee.mobileNo = mobileNo,
+    newEmployee.aadhaarNo=aadhaarNo,
+    newEmployee.panNo=panNo,
 
     await newEmployee.save();
     role.employees = [...role.employees, newEmployee];
@@ -102,7 +105,7 @@ export class EmployeeService {
       where: {
         empId
       },
-      relations: ['role', 'leaves', 'attendances','employeedetails']
+      relations: ['role', 'leaves', 'attendances','employeedetails','payrolls']
     });
 
     if (!employee) {

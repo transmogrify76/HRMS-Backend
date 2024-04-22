@@ -12,6 +12,7 @@ import { MailerModule } from './modules/mailer/mailer.module';
 import { EmployeedetailsModule } from './modules/employeedetails/details.module';
 
 
+
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
@@ -28,7 +29,8 @@ import { EmployeedetailsModule } from './modules/employeedetails/details.module'
     LeaveModule,
     PayrollModule,
     EmployeedetailsModule,
-    MailerModule
+    MailerModule,
+    PayrollModule
   ],
   controllers: [AppController],
   providers: [AppService],

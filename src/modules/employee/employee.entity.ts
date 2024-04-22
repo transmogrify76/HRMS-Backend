@@ -6,6 +6,7 @@ import { Leave } from '../leave/leave.entity';
 import { Payroll } from '../payroll/payroll.entity';
 import { Employeedetails } from '../employeedetails/details.entity';
 
+
 @Entity({ name: 'employees' })
 export class Employee extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'emp_id' })
@@ -17,17 +18,17 @@ export class Employee extends BaseEntity {
   @Column({ name: 'last_name' })
   lastName: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 255 }) // Example length
   email: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, length: 50 }) // Example length
   username: string;
 
-  @Column()
+  @Column({ length: 255 }) // Example length
   password: string;
 
-  @Column({ name: 'joing_date' })
-  joiningDate:string;
+  @Column({ name: 'joining_date' })
+  joiningDate: string;
 
   @ManyToOne(() => Role, role => role.employees)
   @JoinColumn({ name: 'role_id' })
@@ -42,11 +43,20 @@ export class Employee extends BaseEntity {
   @OneToMany(() => Employeedetails, employeedetails => employeedetails.employee)
   employeedetails: Employeedetails[];
 
-  @OneToMany(() => Payroll, payroll => payroll.employee)
+  @OneToOne(() => Payroll, payroll => payroll.employee)
   payrolls: Payroll[];
 
   @Column({ name: 'is_active', type: 'boolean', default: true, nullable: false })
   isActive: boolean;
+
+  @Column({ name: 'aadhaar_no', length: 20 }) // Example length
+  aadhaarNo: string;
+
+  @Column({ name: 'pan_no', length: 20 }) // Example length
+  panNo: string;
+
+  @Column({ name: 'mobile_no', length: 15 }) // Example length
+  mobileNo: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -59,3 +69,4 @@ export class Employee extends BaseEntity {
     this.password = await bcrypt.hash(this.password, 10);
   }
 }
+
