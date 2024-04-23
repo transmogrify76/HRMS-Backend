@@ -105,7 +105,7 @@ export class EmployeeService {
       where: {
         empId
       },
-      relations: ['role', 'leaves', 'attendances','employeedetails','payrolls']
+      relations: ['role', 'leaves', 'attendances','employeedetails','payrolls','payrolldetails']
     });
 
     if (!employee) {
