@@ -58,7 +58,8 @@ export class EmployeeService {
     await role.save();
 
     return {
-      message: `employee ${newEmployee.username} (${newEmployee.firstName} ${newEmployee.lastName}) registered successfully [${newEmployee.role.roleType}]`
+      message: `employee ${newEmployee.username} (${newEmployee.firstName} ${newEmployee.lastName}) registered successfully [${newEmployee.role.roleType}]` ,
+      empId: newEmployee.empId
     };
   }
 
