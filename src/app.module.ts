@@ -10,6 +10,7 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { JwtModule } from '@nestjs/jwt';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { EmployeedetailsModule } from './modules/employeedetails/details.module';
+import { PayrolldetailsModule } from './modules/payrolldetails/payrolldetails.module';
 
 
 
@@ -30,7 +31,8 @@ import { EmployeedetailsModule } from './modules/employeedetails/details.module'
     PayrollModule,
     EmployeedetailsModule,
     MailerModule,
-    PayrollModule
+    PayrollModule,
+    PayrolldetailsModule
   ],
   controllers: [AppController],
   providers: [AppService],

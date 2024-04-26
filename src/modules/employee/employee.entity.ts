@@ -5,6 +5,7 @@ import { Attendance } from '../attendance/attendance.entity';
 import { Leave } from '../leave/leave.entity';
 import { Payroll } from '../payroll/payroll.entity';
 import { Employeedetails } from '../employeedetails/details.entity';
+import { Payrolldetails } from '../payrolldetails/payrolldetails.entity';
 
 
 @Entity({ name: 'employees' })
@@ -45,6 +46,11 @@ export class Employee extends BaseEntity {
 
   @OneToOne(() => Payroll, payroll => payroll.employee)
   payrolls: Payroll[];
+
+
+  @OneToMany(() => Payrolldetails, payrolldetails => payrolldetails.employee)
+  payrolldetails: Payrolldetails[];
+
 
   @Column({ name: 'is_active', type: 'boolean', default: true, nullable: false })
   isActive: boolean;
