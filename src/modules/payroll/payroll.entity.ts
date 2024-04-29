@@ -26,13 +26,13 @@ export class Payroll extends BaseEntity {
   Total_Earnings: number;
 
   @Column({ name: 'Provident Fund', nullable: true })
-  Provident_Fund: number;
+  Provident_Fund: number| null;
 
   @Column({ name: 'Professional Tax', nullable: true })
-  Professional_Tax: number;
+  Professional_Tax: number| null;
 
   @Column({ name: 'ESI_Mediclaim', nullable: true })
-  ESI_Mediclaim: number;
+  ESI_Mediclaim: number| null;
 
 
   @OneToOne(() => Employee, employee => employee.payrolls,{ onDelete: 'CASCADE' })

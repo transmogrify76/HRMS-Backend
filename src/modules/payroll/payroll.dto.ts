@@ -11,7 +11,10 @@ export class PayrollDto {
 "Con_Allowance":980,
 "Other":987,
 "Total_Earnings":87,
-"employee":1
+"employee":1,
+"Provident_Fund":647,
+"Professional_Tax":987,
+"ESI_Mediclaim":789
 
 
 
@@ -47,11 +50,10 @@ export class PayrollDto {
   
   @IsOptional()
   @IsNumber()
-  providentFund: number;
+  Provident_Fund: number;
 
-  @IsOptional()
   @IsNumber()
-  professionalTax: number;
+  Professional_Tax: number;
 
   @IsOptional()
   @IsNumber()
