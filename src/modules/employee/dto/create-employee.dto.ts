@@ -9,6 +9,9 @@ const payload ={
   "username": "Shub1234",
   "joiningDate" : "2024-01-29",
   "password": "Test@2024",
+  "aadhaarNo":"869595965695",
+  "mobileNo":"566565565",
+  "panNo":"DNG6578694",
   "role": 1
 }
 */

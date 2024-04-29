@@ -25,6 +25,16 @@ export class Payroll extends BaseEntity {
   @Column({ name: 'Total_Earnings', nullable: false })
   Total_Earnings: number;
 
+  @Column({ name: 'Provident Fund', nullable: true })
+  Provident_Fund: number;
+
+  @Column({ name: 'Professional Tax', nullable: true })
+  Professional_Tax: number;
+
+  @Column({ name: 'ESI_Mediclaim', nullable: true })
+  ESI_Mediclaim: number;
+
+
   @OneToOne(() => Employee, employee => employee.payrolls,{ onDelete: 'CASCADE' })
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
