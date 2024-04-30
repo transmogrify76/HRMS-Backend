@@ -28,8 +28,26 @@ export class Employee extends BaseEntity {
   @Column({ length: 255 }) // Example length
   password: string;
 
-  @Column({ name: 'joining_date' })
+  @Column({ name: 'joining_date',nullable: true })
   joiningDate: string;
+
+  @Column({ name: 'confirmation_Date',nullable: true })
+  confirmationData: string;
+
+  @Column({ name: 'Blood_group',nullable: true })
+  bloodGroup: string;
+
+  @Column({ name: 'Present_Address',nullable: true })
+  Present_Address: string;
+
+  @Column({ name: 'Permanent_Address',nullable: true })
+  Permanent_Address: string;
+
+  @Column({ name: 'Emp_ID_NO',nullable: true })
+  empIDNO: string;
+
+  @Column({ name: 'Emergency_no', length: 15 ,nullable: true}) // Example length
+  emergencyNo: string;
 
   @ManyToOne(() => Role, role => role.employees)
   @JoinColumn({ name: 'role_id' })

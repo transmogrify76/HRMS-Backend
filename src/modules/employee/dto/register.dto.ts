@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, IsStrongPassword, Length} from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length} from "class-validator";
 
 
 /*
@@ -11,7 +11,13 @@ import { IsEmail, IsNotEmpty, IsString, IsStrongPassword, Length} from "class-va
   "password": "Test@2024",
   "aadhaarNo":"869595965695",
   "mobileNo":"566565565",
-  "panNo":"DNG6578694"
+  "panNo":"DNG6578694",
+  "emergencyNo":"6777888890",
+   "empIDNO":"23422",
+   "Permanent_Address":"12F k c pal kol-700076",
+   "Present_Address":"12F k c pal kol-700076",
+   "bloodGroup":"b+",
+   "confirmationData":"2025-09-25"
 
 */
 export class RegisterDto {
@@ -52,4 +58,28 @@ export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   mobileNo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  confirmationData: string;
+
+  @IsString()
+  @IsNotEmpty()
+  bloodGroup: string;
+
+  @IsString()
+  @IsNotEmpty()
+  Present_Address: string;
+
+  @IsString()
+  @IsNotEmpty()
+  Permanent_Address: string;
+
+  @IsString()
+  @IsNotEmpty()
+  empIDNO: string;
+
+  @IsString()
+  @IsNotEmpty()
+  emergencyNo: string;
 }

@@ -38,7 +38,7 @@ export class EmployeeService {
   }
 
   async register(registerDto: RegisterDto) {
-    const { firstName, lastName, email, username, password, joiningDate, mobileNo, aadhaarNo, panNo } = registerDto;
+    const { firstName, lastName, email, username, password, joiningDate, mobileNo, aadhaarNo, panNo,bloodGroup,Present_Address,Permanent_Address,empIDNO,emergencyNo,confirmationData } = registerDto;
     const { role } = await this.roleService.findByRoleType(RoleType.EMPLOYEE);
 
     const newEmployee = new Employee();
@@ -52,6 +52,13 @@ export class EmployeeService {
     newEmployee.mobileNo = mobileNo,
     newEmployee.aadhaarNo=aadhaarNo,
     newEmployee.panNo=panNo,
+    newEmployee.empIDNO = empIDNO;
+    newEmployee.Present_Address = Present_Address,
+    newEmployee.Permanent_Address=Permanent_Address,
+    newEmployee.bloodGroup=bloodGroup,
+    newEmployee.emergencyNo=emergencyNo,
+    newEmployee.confirmationData=confirmationData,
+
 
     await newEmployee.save();
     role.employees = [...role.employees, newEmployee];
@@ -80,7 +87,8 @@ export class EmployeeService {
           lastName: employee.lastName,
           username: employee.username,
           email: employee.email,
-          roleType: employee.role.roleType
+          roleType: employee.role.roleType,
+
         }
       });
 
