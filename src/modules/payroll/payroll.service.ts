@@ -76,6 +76,15 @@ async updateByEmployeeId(empId: number, payrollDto: Partial<PayrollDto>) {
   }
   if (payrollDto.Total_Earnings !== undefined) {
       payroll.Total_Earnings = payrollDto.Total_Earnings;
+  }  
+  if (payrollDto.Provident_Fund !== undefined) {
+    payroll.Provident_Fund = payrollDto.Provident_Fund;
+  }
+  if (payrollDto.Professional_Tax !== undefined) {
+    payroll.Professional_Tax = payrollDto.Professional_Tax;
+  }
+  if (payrollDto.ESI_Mediclaim !== undefined) {
+    payroll.ESI_Mediclaim = payrollDto.ESI_Mediclaim;
   }
 
   payroll = await this.payrollRepository.save(payroll);
