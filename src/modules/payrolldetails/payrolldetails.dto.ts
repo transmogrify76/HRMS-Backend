@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length,IsOptional } from "class-validator";
 import { Employee } from "../employee/employee.entity";
 export class PayrolldetailsDto {
     
@@ -54,4 +54,15 @@ export class PayrolldetailsDto {
   @IsNotEmpty()
   month: string;
 
+  @IsOptional()
+  @IsNumber()
+  providentFund: number;
+
+  @IsOptional()
+  @IsNumber()
+  professionalTax: number;
+
+  @IsOptional()
+  @IsNumber()
+  ESI_Mediclaim: number;
 }

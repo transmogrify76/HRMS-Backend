@@ -1,5 +1,7 @@
+
 import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, IsStrongPassword, Length } from "class-validator";
 import { Employee } from "../employee/employee.entity";
+import { IsNull } from "typeorm";
 export class PayrollDto {
  /*
 
@@ -10,7 +12,10 @@ export class PayrollDto {
 "Con_Allowance":980,
 "Other":987,
 "Total_Earnings":87,
-"employee":1
+"employee":1,
+"Provident_Fund":647,
+"Professional_Tax":987,
+"ESI_Mediclaim":789
 
 
 
@@ -42,5 +47,20 @@ export class PayrollDto {
   @IsNumber()
   @IsOptional()
   employee: Employee;
+
+  
+  @IsOptional()
+  @IsNumber()
+  Provident_Fund: number;
+
+  @IsNumber()
+  Professional_Tax: number;
+
+  @IsOptional()
+  @IsNumber()
+  ESI_Mediclaim: number;
+
+
+  
 
 }

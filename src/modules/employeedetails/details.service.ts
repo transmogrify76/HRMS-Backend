@@ -26,7 +26,7 @@ export class EmployeedetailService {
 
     await this.employeedetailsRepository.save(newDetails); 
     if (!Array.isArray(employee.employeedetails)) {
-        employee.employeedetails = [];
+        employee.employeedetails = [];                                                                
     }
 
     employee.employeedetails.push(newDetails);
@@ -37,7 +37,7 @@ export class EmployeedetailService {
 }
 
 
-   async findAll() {
+  async findAll() {
     const employeedetails = await this.employeedetailsRepository.find();
 
     return {
