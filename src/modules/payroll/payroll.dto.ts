@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, IsStrongPassword, Length } from "class-validator";
 import { Employee } from "../employee/employee.entity";
 export class PayrollDto {
  /*
@@ -40,7 +40,7 @@ export class PayrollDto {
   Total_Earnings: number;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   employee: Employee;
 
 }
