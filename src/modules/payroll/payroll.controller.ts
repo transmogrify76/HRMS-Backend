@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post,Put, Query, ValidationPipe } from '@nestjs/common';
 import { PayrollService } from './payroll.service';
 import { Payroll } from './payroll.entity'; 
 import { PayrollDto } from './payroll.dto';
@@ -27,4 +27,15 @@ export class PayrollController {
       return await this.PayrollService.findAll();
     }
   }
+
+  @Put(':empId')
+    async updatePayrollByEmployeeId(@Param('empId') empId: string, @Body() payrollDto: PayrollDto) {
+        try {
+            const result = await this.PayrollService.updateByEmployeeId(+empId, payrollDto);
+            return result;
+        } catch (error) {
+              console.log(error)
+         
+        }
+    }
 }
