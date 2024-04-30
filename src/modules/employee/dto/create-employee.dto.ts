@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, Length } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, IsStrongPassword, Length } from "class-validator";
 import { Role } from "../role/role.entity";
 
 /*
@@ -49,6 +49,7 @@ export class CreateEmployeeDto {
   role: Role;
   
   @IsString()
+  @IsOptional()
   joiningDate:string;
  
   @IsString()
