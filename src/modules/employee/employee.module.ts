@@ -13,6 +13,6 @@ import { EmployeeService } from './employee.service';
   ],
   providers: [RoleService, EmployeeService],
   controllers: [RoleController, EmployeeController],
-  exports: [EmployeeService]
+  exports: [EmployeeService,TypeOrmModule]
 })
 export class EmployeeModule { }

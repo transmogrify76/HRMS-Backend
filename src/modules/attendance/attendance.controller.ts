@@ -2,6 +2,8 @@ import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query, Validat
 import { AttendanceService } from './attendance.service';
 import { CreateAttendanceDto } from './dto/create-attendance.dto';
 import { UpdateAttendanceDto } from './dto/update-attendance.dto';
+import { Employee } from '../employee/employee.entity';
+import { Attendance } from './attendance.entity';
 
 @Controller('attendance')
 export class AttendanceController {
@@ -25,6 +27,23 @@ export class AttendanceController {
     } else {
       return await this.attendanceService.findAll();
     }
+  }
+  @Get(':month')
+  async getEmployeeDetailsByMonth(@Param('month') month: number): Promise<{ employee: Employee, attendances: Attendance[] }[]> {
+    const employeeDetailsWithAttendances = await this.attendanceService.getEmployeeDetailsByMonth(month);
+
+    // Extracting employee details and unique attendances
+    const result: { employee: Employee, attendances: Attendance[] }[] = [];
+    const uniqueEmployeesMap = new Map<number, Employee>();
+    employeeDetailsWithAttendances.forEach(({ employee, attendances }) => {
+      if (!uniqueEmployeesMap.has(employee.empId)) {
+        uniqueEmployeesMap.set(employee.empId, employee);
+        result.push({ employee, attendances });
+      }
+    });
+
+    return result;
+  
   }
 
   @Patch(':id')
