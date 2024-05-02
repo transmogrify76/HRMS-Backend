@@ -28,7 +28,7 @@ export class AttendanceController {
       return await this.attendanceService.findAll();
     }
   }
-  @Get('employee/month/:month')
+  @Get(':month')
   async getEmployeeDetailsByMonth(@Param('month') month: number): Promise<{ employee: Employee, attendances: Attendance[] }[]> {
     const employeeDetailsWithAttendances = await this.attendanceService.getEmployeeDetailsByMonth(month);
 
