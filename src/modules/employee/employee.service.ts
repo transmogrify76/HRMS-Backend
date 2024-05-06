@@ -128,8 +128,6 @@ export class EmployeeService {
 
   async updateById(empId: number, updateEmployeeDto: UpdateEmployeeDto) {
     const { employee } = await this.findById(empId);
-    const { role } = await this.roleService.findById(+updateEmployeeDto.role);
-    updateEmployeeDto.role = role;
     await this.employeeRepository.update(empId, updateEmployeeDto);
 
     return {
