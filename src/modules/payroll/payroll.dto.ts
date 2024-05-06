@@ -12,10 +12,11 @@ export class PayrollDto {
 "Con_Allowance":980,
 "Other":987,
 "Total_Earnings":87,
-"employee":1,
 "Provident_Fund":647,
 "Professional_Tax":987,
-"ESI_Mediclaim":789
+"ESI_Mediclaim":789,
+"deduction":234,
+"employee":1
 
 
 
@@ -60,7 +61,9 @@ export class PayrollDto {
   @IsNumber()
   ESI_Mediclaim: number;
 
-
+  @IsNumber()
+  @IsNotEmpty()
+  deduction: number;
   
 
 }

@@ -41,6 +41,16 @@ export class Payrolldetails extends BaseEntity {
   @Column({ name: 'ESI_Mediclaim', nullable: true })
   ESI_Mediclaim: number;
 
+  @Column({ name: 'Other deduction', nullable: true })
+  otherdeduction: number;
+
+  @Column({ name: 'Total_deduction', nullable: false })
+  totaldeduction: number;
+
+  @Column({ name: 'Transferred amount', nullable: false })
+  transferred_amount: number;
+
+  
   @ManyToOne(() => Employee, employee => employee.payrolls,{ onDelete: 'CASCADE' })
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
