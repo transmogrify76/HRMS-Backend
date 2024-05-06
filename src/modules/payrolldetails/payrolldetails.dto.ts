@@ -11,9 +11,20 @@ export class PayrolldetailsDto {
 "Con_Allowance":980,
 "Other":987,
 "Total_Earnings":87,
-"employee":1,
 "workingDays":28,
-"month":"APRIL"
+"month":"APRIL",
+"Provident_Fund":3456,
+"Professional_Tax":4353,
+"ESI_Mediclaim":232,
+"otherdeduction":456,
+"totaldeduction":6569,
+"transferred_amount":647,
+"employee":1
+
+
+
+
+
 
 
 
@@ -56,13 +67,25 @@ export class PayrolldetailsDto {
 
   @IsOptional()
   @IsNumber()
-  providentFund: number;
+  Provident_Fund: number;
 
   @IsOptional()
   @IsNumber()
-  professionalTax: number;
+  Professional_Tax: number;
 
   @IsOptional()
   @IsNumber()
   ESI_Mediclaim: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  totaldeduction: number;
+
+  @IsOptional()
+  @IsNumber()
+  otherdeduction: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  transferred_amount: number;
 }
