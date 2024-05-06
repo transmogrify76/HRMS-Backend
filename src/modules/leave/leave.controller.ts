@@ -33,7 +33,7 @@ export class LeaveController {
       
       const from = 'transmogrifyhrms@gmail.com';
       const to = 'transev76@gmail.com';
-      const subject = 'Leave Application Received!!!';
+      const subject = `Leave Application Received from ${employee.employee.firstName}${employee.employee.lastName} !!!`;
       const htmlBody = `<p>Hello Sir,</p>
       <p>A leave application has been received from ${employee.employee.firstName}${employee.employee.lastName} <br>
       with following details:</p>
@@ -41,7 +41,9 @@ export class LeaveController {
       <p>Start Date: ${createLeaveDto.startDate}</p>
       <p>End Date: ${createLeaveDto.endDate}</p>
       <p>Employee mailID: ${employee.employee.email}</p>
-      <p>Please take necessary action.</p>`;
+      <p>Please take necessary action.</p>
+      <p>Visit: <a href="https://transev.cloud">TransmogrifyHRMS-Portal</a></p> <br><br><br>
+      <p>Thank you for using Transmogrify HRMS. Have a nice day!!</p><br>`;
 
 
       //mail bhejoooooo
@@ -108,9 +110,10 @@ private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
   const from = 'transmogrifyhrms@gmail.com';
   const to = employeeEmail;
   const subject = 'Leave Request Updated';
-  const htmlBody = `<p>Hello ${firstName} ${lastName},</p>
-                    <p>Your leave request has been ${status}. <br></p>
-                    <p>For further details please check updated leave details on your HRMS.</p>
+  const htmlBody = `<p>Dear ${firstName}! <br> Greetings from Transmogrify.</p> <br>
+                    <p>You have applied for the leave recently. Your leave request has been ${status}. <br></p>
+                    <p>Please log in to your HRMS account to view the updated leave details. <a href="https://transev.cloud">TransmogrifyHRMS-Portal</a></p>
+                    <p>If you have any questions or concerns, feel free to reach out to us.</p> <br><br>
                     <p>Thank you for using Transmogrify HRMS.</p>`;
 
   // Send email

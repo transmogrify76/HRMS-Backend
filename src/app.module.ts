@@ -22,7 +22,7 @@ import { PayrolldetailsModule } from './modules/payrolldetails/payrolldetails.mo
       secret: 'supratim531',
       signOptions: {
         algorithm: 'HS512',
-        expiresIn: '120m'
+        expiresIn: '500m'
       }
     }),
     EmployeeModule,
