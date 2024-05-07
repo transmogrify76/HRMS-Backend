@@ -3,6 +3,8 @@ import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { EmployeeService } from '../employee/employee.service';
 import { MailerService } from '../mailer/mailer.service';
+import { Employee } from '../employee/employee.entity';
+import { Leave } from './leave.entity';
 
 @Controller('leave')
 export class LeaveController {
@@ -119,6 +121,22 @@ private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
   // Send email
   await this.mailerService.sendEmail(from, to, subject, htmlBody, empId);
 }
+@Get(':month')
+  async getEmployeeDetailsByMonth(@Param('month') month: number): Promise<{ employee: Employee, leave: Leave[] }[]> {
+    const employeeDetailsWithAttendances = await this.leaveService.getEmployeeDetailsByMonth(month);
 
+    // Extracting employee details and unique attendances
+    const result: { employee: Employee, leave: Leave[] }[] = [];
+    const uniqueEmployeesMap = new Map<number, Employee>();
+    employeeDetailsWithAttendances.forEach(({ employee, leave }) => {
+      if (!uniqueEmployeesMap.has(employee.empId)) {
+        uniqueEmployeesMap.set(employee.empId, employee);
+        result.push({ employee, leave });
+      }
+    });
+
+    return result;
+  
+  }
   
 }

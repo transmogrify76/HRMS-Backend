@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { Leave } from './leave.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { EmployeeService } from '../employee/employee.service';
 import { Status } from 'src/enums/status.enum';
+import { Employee } from '../employee/employee.entity';
 
 @Injectable()
 export class LeaveService {
@@ -28,7 +29,7 @@ export class LeaveService {
     await employee.save();
 
     return {
-      message: `a brand new leave request is generated for ${employee.username} (${newLeave.startDate} - ${newLeave.endDate}) [${newLeave.leaveStatus}]`
+      message: `a brand new leave request is generated for ${employee.username} (${newLeave.startDate} - ${newLeave.endDate}) for ${newLeave.duration}days[${newLeave.leaveStatus}]`
     };
   }
 
@@ -103,5 +104,32 @@ export class LeaveService {
     leave.leaveStatus = leaveStatus;
     return this.leaveRepository.save(leave);
   }
+  
+  async getEmployeeDetailsByMonth(month: number): Promise<{ employee: Employee, leave: Leave[] }[]> {
+    const startDate = new Date(`2024-${month.toString().padStart(2, '0')}-01T00:00:00.000Z`);
+    const endDate = new Date(startDate);
+    endDate.setMonth(endDate.getMonth() + 1);
+
+    const attendances = await this.leaveRepository.find({
+      where: {
+        startDate: Between(startDate, endDate),
+      },
+      relations: ['employee'], 
+    });
+
+    // Grouping attendances by employee
+    const leavemap = new Map<number, { employee: Employee, leave: Leave[] }>();
+    attendances.forEach(leave => {
+      const empId = leave.employee.empId;
+      if (!leavemap.has(empId)) {
+        leavemap.set(empId, { employee: leave.employee, leave: [] });
+      }
+      leavemap.get(empId).leave.push(leave);
+    });
+
+    // Extracting employee details and unique attendances
+    const result: { employee: Employee, leave: Leave[] }[] = Array.from(leavemap.values());
+    return result;
+}
   
 }

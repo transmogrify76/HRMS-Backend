@@ -7,12 +7,13 @@ const payload = {
   "startDate": "04-11-2024",
   "endDate": "04-13-2024",
   "reason": "This is personal",
-  "employee": 1
+  "employee": 1,
+  "duration":3
 }
 */
 
 /**
- * @author Supratim Majumder
+ * @author Supratim and Sagnik
  * @description request-body to create leave request. Demo payload is given above the class
  */
 export class CreateLeaveDto {
@@ -37,4 +38,8 @@ export class CreateLeaveDto {
   @IsEmail()
   @IsNotEmpty()
   employeeEmail: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  duration: number;
 }
