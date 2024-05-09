@@ -46,6 +46,10 @@ export class Employee extends BaseEntity {
   @Column({ name: 'Emp_ID_NO',nullable: true })
   empIDNO: string;
 
+
+  @Column({ name: 'Lave_count',nullable: true })
+  leaveCount: number;
+
   @Column({ name: 'Emergency_no', length: 15 ,nullable: true}) // Example length
   emergencyNo: string;
 
