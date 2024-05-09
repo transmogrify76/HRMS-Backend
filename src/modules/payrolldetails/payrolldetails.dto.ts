@@ -23,11 +23,6 @@ export class PayrolldetailsDto {
 
 
 
-
-
-
-
-
 */
   @IsNumber()
   @IsNotEmpty()
