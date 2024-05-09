@@ -22,6 +22,9 @@ export class Leave {
   @Column({ name:'duration', nullable:false})
   duration: number;
 
+  @Column({ name:'Remark', nullable:true })
+  remark: string;
+
   @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;

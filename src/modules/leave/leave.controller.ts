@@ -72,9 +72,10 @@ export class LeaveController {
   async markOut(
     @Param('empId') empId: number,
     @Param('leaveId') leaveId: number,
-    @Body('leaveStatus') leaveStatus: string, 
+    @Body('leaveStatus') leaveStatus: string,
+    @Body('remark') leaveremark: string
   ) {
-    const result = await this.leaveService.updateById(empId, leaveId, leaveStatus);
+    const result = await this.leaveService.updateById(empId, leaveId, leaveStatus, leaveremark);
 
     // Send email notification if the update was successful
     await this.sendLeaveUpdateEmail(leaveId, empId);
@@ -108,7 +109,6 @@ private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
   const { firstName, lastName } = employee;
   console.log('++++++++++' , employee);
   
-  // Prepare email content
   const from = 'transmogrifyhrms@gmail.com';
   const to = employeeEmail;
   const subject = 'Leave Request Updated';
@@ -125,7 +125,7 @@ private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
   async getEmployeeDetailsByMonth(@Param('month') month: number): Promise<{ employee: Employee, leave: Leave[] }[]> {
     const employeeDetailsWithAttendances = await this.leaveService.getEmployeeDetailsByMonth(month);
 
-    // Extracting employee details and unique attendances
+
     const result: { employee: Employee, leave: Leave[] }[] = [];
     const uniqueEmployeesMap = new Map<number, Employee>();
     employeeDetailsWithAttendances.forEach(({ employee, leave }) => {

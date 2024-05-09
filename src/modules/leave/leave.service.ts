@@ -23,6 +23,7 @@ export class LeaveService {
 
     // createLeaveDto.empId = employee;
     createLeaveDto['leaveStatus'] = Status.PENDING;
+    createLeaveDto['remark'] = null;
 
     const newLeave = await this.leaveRepository.save(createLeaveDto);
     employee.leaves = [...employee.leaves, newLeave];
@@ -94,7 +95,7 @@ export class LeaveService {
   //   };
   // }
 
-  async updateById(empId:number,leaveId: number, leaveStatus:string) {
+  async updateById(empId:number,leaveId: number, leaveStatus:string, leaveremark:string) {
     const leave = await this.leaveRepository.findOne({
       where: { employee: { empId: empId }, leaveId: leaveId },
     });
@@ -102,6 +103,7 @@ export class LeaveService {
       throw new Error('Attendance record not found');
     }
     leave.leaveStatus = leaveStatus;
+    leave.remark = leaveremark;
     return this.leaveRepository.save(leave);
   }
   
