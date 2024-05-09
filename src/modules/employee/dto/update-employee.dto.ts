@@ -43,4 +43,8 @@ export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
     @IsString()
     @IsOptional()
     emergencyNo: string;
+
+    @IsNumber()
+    @IsOptional()
+    leaveCount: number;
  }
