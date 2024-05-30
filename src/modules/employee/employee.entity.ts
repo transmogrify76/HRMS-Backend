@@ -31,6 +31,9 @@ export class Employee extends BaseEntity {
   @Column({ name: 'joining_date',nullable: true })
   joiningDate: string;
 
+  @Column({ name: 'relievingDate',nullable: true })
+  relievingDate: string;
+
   @Column({ name: 'confirmation_Date',nullable: true })
   confirmationData: string;
 
