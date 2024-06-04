@@ -34,7 +34,8 @@ export class LeaveController {
       // console.log('============================' , employee);
       
       const from = 'transmogrifyhrms@gmail.com';
-      const to = 'transev76@gmail.com';
+      const to = 'tgwbin@gmail.com';
+      // const to = 'transev76@gmail.com';
       const subject = `Leave Application Received from ${employee.employee.firstName}${employee.employee.lastName} !!!`;
       const htmlBody = `<p>Hello Sir,</p>
       <p>A leave application has been received from ${employee.employee.firstName}${employee.employee.lastName} <br>
@@ -101,19 +102,18 @@ export class LeaveController {
 // }
 
 private async sendLeaveUpdateEmail(leaveId: number, empId: number) {
-  console.log('++++++++++===============================================' , leaveId , empId);
   
   const { leave, employee } = await this.leaveService.findById(leaveId, empId);
   const employeeEmail = leave.employeeEmail;
   const status = leave.leaveStatus;
   const { firstName, lastName } = employee;
-  console.log('++++++++++' , employee);
   
   const from = 'transmogrifyhrms@gmail.com';
   const to = employeeEmail;
   const subject = 'Leave Request Updated';
   const htmlBody = `<p>Dear ${firstName}! <br> Greetings from Transmogrify.</p> <br>
                     <p>You have applied for the leave recently. Your leave request has been ${status}. <br></p>
+                    <p>Remark from Admin (if any): ${leave.remark} </p>
                     <p>Please log in to your HRMS account to view the updated leave details. <a href="https://transev.cloud">TransmogrifyHRMS-Portal</a></p>
                     <p>If you have any questions or concerns, feel free to reach out to us.</p> <br><br>
                     <p>Thank you for using Transmogrify HRMS.</p>`;
