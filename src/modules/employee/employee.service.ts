@@ -165,7 +165,7 @@ export class EmployeeService {
       await this.employeeRepository.save(employee);
   
       return {
-        message: `Employee with ID ${empId} has been deactivated successfully`,
+        message: `Employee with ID ${empId} has been deactivated or activated successfully`,
       };
     } catch (error) {
       throw new Error(`Error deactivating employee: ${error.message}`);

@@ -1,11 +1,16 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateEmployeeDto } from './create-employee.dto';
-import { IsString, IsOptional, IsBoolean, IsNumber, IsNotEmpty } from 'class-validator';
+import {
+    IsString,
+    IsOptional,
+    IsBoolean,
+    IsNumber,
+    IsNotEmpty,
+} from 'class-validator';
 
 export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
-
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     empId: number;
 
     @IsString()
@@ -56,34 +61,27 @@ export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
     @IsOptional()
     leaveCount: number;
 
-
     @IsString()
     @IsOptional()
     Education_qualification: string;
-  
-  
+
     @IsString()
     @IsOptional()
     dept: string;
-  
-  
+
     @IsString()
     @IsOptional()
     post: string;
-  
+
     @IsString()
     @IsOptional()
     p_email: string;
-     
-  
+
     @IsString()
     @IsOptional()
     lap_no: string;
- 
 
     @IsBoolean()
-    @IsNotEmpty()
+    @IsOptional()
     isActive: boolean;
-
 }
-

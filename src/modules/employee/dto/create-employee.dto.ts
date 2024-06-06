@@ -68,4 +68,8 @@ export class CreateEmployeeDto {
   @IsNotEmpty()
   mobileNo: string;
 
+  @IsString()
+  @IsOptional()
+  confirmationData: string;
+
 }

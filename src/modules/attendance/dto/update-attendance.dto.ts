@@ -4,7 +4,7 @@ import { PartialType } from "@nestjs/mapped-types";
 import { Status } from "src/enums/status.enum";
 
 export class UpdateAttendanceDto extends PartialType(CreateAttendanceDto) {
-  @IsEnum(Status, { message: 'attStatus must be PENDING or APPROVED or REJECTED' })
+  @IsEnum(Status, { message: 'attStatus must be PENDING or APPROVED or APPROVED(Wthout Pay)' })
   @IsNotEmpty()
   @IsOptional()
   attStatus: Status;

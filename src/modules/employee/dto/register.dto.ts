@@ -60,7 +60,7 @@ export class RegisterDto {
   mobileNo: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   confirmationData: string;
 
   @IsString()
@@ -101,7 +101,7 @@ export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   p_email: string;
-   
+
 
   @IsString()
   @IsOptional()
