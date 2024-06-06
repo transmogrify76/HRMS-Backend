@@ -56,8 +56,34 @@ export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
     @IsOptional()
     leaveCount: number;
 
+
+    @IsString()
+    @IsOptional()
+    Education_qualification: string;
+  
+  
+    @IsString()
+    @IsOptional()
+    dept: string;
+  
+  
+    @IsString()
+    @IsOptional()
+    post: string;
+  
+    @IsString()
+    @IsOptional()
+    p_email: string;
+     
+  
+    @IsString()
+    @IsOptional()
+    lap_no: string;
+ 
+
     @IsBoolean()
     @IsNotEmpty()
     isActive: boolean;
 
 }
+

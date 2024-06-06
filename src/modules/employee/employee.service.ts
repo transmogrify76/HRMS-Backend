@@ -38,7 +38,7 @@ export class EmployeeService {
   }
 
   async register(registerDto: RegisterDto) {
-    const { firstName, lastName, email, username, password, joiningDate, mobileNo, aadhaarNo, panNo,bloodGroup,Present_Address,Permanent_Address,empIDNO,emergencyNo,confirmationData } = registerDto;
+    const { firstName, lastName, email, username, password, joiningDate, mobileNo, aadhaarNo, panNo,bloodGroup,Present_Address,Permanent_Address,empIDNO,emergencyNo,confirmationData,Education_qualification,dept,post,p_email,lap_no } = registerDto;
     const { role } = await this.roleService.findByRoleType(RoleType.EMPLOYEE);
 
     const newEmployee = new Employee();
@@ -58,6 +58,11 @@ export class EmployeeService {
     newEmployee.bloodGroup=bloodGroup,
     newEmployee.emergencyNo=emergencyNo,
     newEmployee.confirmationData=confirmationData,
+    newEmployee.Education_qualification=Education_qualification,
+    newEmployee.dept=dept,
+    newEmployee.lap_no=lap_no,
+    newEmployee.post=post,
+    newEmployee.p_email=p_email,
 
 
     await newEmployee.save();

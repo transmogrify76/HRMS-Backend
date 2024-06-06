@@ -80,13 +80,30 @@ export class Employee extends BaseEntity {
   @Column({ name: 'is_active', type: 'boolean', default: true, nullable: false })
   isActive: boolean;
 
-  @Column({ name: 'aadhaar_no', length: 20 }) // Example length
+  @Column({ name: 'aadhaar_no', length: 20 }) 
   aadhaarNo: string;
 
-  @Column({ name: 'pan_no', length: 20 }) // Example length
+  @Column({ name: 'pan_no', length: 20 }) 
   panNo: string;
 
-  @Column({ name: 'mobile_no', length: 15 }) // Example length
+
+  @Column({ name: 'Education_qualification', nullable: true }) 
+  Education_qualification: string;
+
+  @Column({ name: 'Dept', nullable: true }) 
+  dept: string;
+  
+  @Column({ name: 'post', nullable: true }) 
+  post: string;
+  
+  @Column({ name: 'p_email', nullable: true }) 
+  p_email: string;
+
+
+  @Column({ name: 'lap_no', nullable: true }) 
+  lap_no: string;
+
+  @Column({ name: 'mobile_no', length: 15 }) 
   mobileNo: string;
 
   @CreateDateColumn({ name: 'created_at' })
