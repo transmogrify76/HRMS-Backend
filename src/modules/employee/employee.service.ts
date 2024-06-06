@@ -114,6 +114,18 @@ export class EmployeeService {
     };
   }
 
+  async findAllActive() {
+    const employees = await this.employeeRepository.find({
+      where: {
+        isActive: true 
+      }
+    });
+
+    return {
+      employees
+    };
+  }
+
   async findById(empId: number) {
     const employee = await this.employeeRepository.findOne({
       where: {
@@ -140,22 +152,67 @@ export class EmployeeService {
     };
   }
 
+  async deactivateEmployee(empId: number, isActive: boolean) {
+    const employee = await this.employeeRepository.findOne({ where: { empId } });
+  
+    if (!employee) {
+      throw new NotFoundException(`Employee with ID ${empId} not found`);
+    }
+  
+    employee.isActive = isActive;
+  
+    try {
+      await this.employeeRepository.save(employee);
+  
+      return {
+        message: `Employee with ID ${empId} has been deactivated successfully`,
+      };
+    } catch (error) {
+      throw new Error(`Error deactivating employee: ${error.message}`);
+    }
+  }
+  
+
+  // async delete(empId: number) {
+  //   const employeeToRemove = await this.employeeRepository.findOne({
+  //     where: { empId },
+  //     relations: ['leaves', 'attendances','employeedetails'],
+  //   });
+  //   if (!employeeToRemove) {
+  //     throw new NotFoundException(`Employee with ID ${empId} not found`)
+  //   }
+  //   try {
+  //     await employeeToRemove.remove();
+  //   } catch (error) {
+  //     throw new Error(`Error deleting employee: ${error.message}`);
+  //   }
+
+  //   return {
+  //     message: `Employee ${employeeToRemove.username} (${employeeToRemove.firstName} ${employeeToRemove.lastName}) deleted successfully`,
+  //   };
+  // }
+
   async delete(empId: number) {
     const employeeToRemove = await this.employeeRepository.findOne({
       where: { empId },
-      relations: ['leaves', 'attendances','employeedetails'],
+      relations: ['leaves', 'attendances', 'employeedetails'],
     });
+    
     if (!employeeToRemove) {
-      throw new NotFoundException(`Employee with ID ${empId} not found`)
+      throw new NotFoundException(`Employee with ID ${empId} not found`);
     }
+    
+    employeeToRemove.isActive = false;
+  
     try {
-      await employeeToRemove.remove();
+      await employeeToRemove.save();
     } catch (error) {
-      throw new Error(`Error deleting employee: ${error.message}`);
+      throw new Error(`Error deactivating employee: ${error.message}`);
     }
-
+  
     return {
-      message: `Employee ${employeeToRemove.username} (${employeeToRemove.firstName} ${employeeToRemove.lastName}) deleted successfully`,
+      message: `Employee ${employeeToRemove.username} (${employeeToRemove.firstName} ${employeeToRemove.lastName}) deactivated successfully`,
     };
   }
+  
 }

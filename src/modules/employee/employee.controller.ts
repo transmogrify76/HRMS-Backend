@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UseGuards, Delete,ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, UseGuards, Delete,ValidationPipe, BadRequestException } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -38,9 +38,16 @@ export class EmployeeController {
 
   @Roles(RoleType.ADMIN)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
+
+  
   @Get()
   async findAll() {
     return await this.employeeService.findAll();
+  }
+
+  @Get('active')
+  async findAllActive() {
+    return await this.employeeService.findAllActive();
   }
 
   @Get(':id')
@@ -57,6 +64,23 @@ export class EmployeeController {
   ) {
     return await this.employeeService.updateById(empId, updateEmployeeDto);
   }
+
+  @Post('deactivate')
+async deactivateEmployee(
+  @Body() payload: { isActive: boolean; empId: number }
+) {
+  const { isActive, empId } = payload;
+
+  if (typeof empId !== 'number' || typeof isActive !== 'boolean') {
+    throw new BadRequestException('Invalid request body');
+  }
+
+  // Call the service method to deactivate the employee
+  return await this.employeeService.deactivateEmployee(empId, isActive);
+}
+
+
+
   @Delete(':id')
   async delete(@Param('id') id: number) {
     return await this.employeeService.delete(id);

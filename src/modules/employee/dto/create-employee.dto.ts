@@ -51,7 +51,11 @@ export class CreateEmployeeDto {
   @IsString()
   @IsOptional()
   joiningDate:string;
- 
+
+  @IsString()
+  @IsOptional()
+  relievingDate:string;
+
   @IsString()
   @IsNotEmpty()
   aadhaarNo: string;
