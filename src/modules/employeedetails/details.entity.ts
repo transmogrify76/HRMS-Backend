@@ -7,7 +7,7 @@ export class Employeedetails extends BaseEntity {
   detailsId:number;
 
   @Column({ name: 'bank_account_name' })
-  bankAccountNAME: string;
+  bankAccountName: string;
 
   @Column({ name: 'bank_account_no' })
   bankAccountNo: string;
