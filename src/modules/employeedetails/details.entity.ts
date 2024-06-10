@@ -6,6 +6,8 @@ export class Employeedetails extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'details_id' })
   detailsId:number;
 
+  @Column({ name: 'bank_account_name' })
+  bankAccountNAME: string;
 
   @Column({ name: 'bank_account_no' })
   bankAccountNo: string;
@@ -17,6 +19,7 @@ export class Employeedetails extends BaseEntity {
   @ManyToOne(() => Employee, { onDelete: 'CASCADE' }) 
   @JoinColumn({ name: 'emp_id' })
   employee: Employee;
+
 
 
 }

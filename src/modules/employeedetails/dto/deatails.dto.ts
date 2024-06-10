@@ -17,7 +17,12 @@ export class Employeedetailsdto {
   bankAccountNo: string;
 
   @IsString()
+  bankAccountName: string;
+
+  @IsString()
   IFSCno: string;
+
+  
 
   @IsNumber()
   @IsNotEmpty()
