@@ -6,7 +6,7 @@ payload{
     "adhaarCardNo":"869595965695",
     "bankAccountNo":"835983587894",
     "IFSCno":"JJDUE838330",
-    "panNo":"DNG6578694"
+    "bankAccountName":"4444444444444444"
     "employee":1
 }
 */
@@ -17,8 +17,12 @@ export class Employeedetailsdto {
   bankAccountNo: string;
 
   @IsString()
+  bankAccountName: string;
+
+  @IsString()
   IFSCno: string;
 
+  
   @IsNumber()
   @IsNotEmpty()
   employee: Employee;
