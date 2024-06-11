@@ -34,8 +34,8 @@ export class LeaveController {
       // console.log('============================' , employee);
       
       const from = 'transmogrifyhrms@gmail.com';
-      const to = 'tgwbin@gmail.com';
-      // const to = 'transev76@gmail.com';
+      // const to = 'tgwbin@gmail.com';
+      const to = 'transev76@gmail.com';
       const subject = `Leave Application Received from ${employee.employee.firstName}${employee.employee.lastName} !!!`;
       const htmlBody = `<p>Hello Sir,</p>
       <p>A leave application has been received from ${employee.employee.firstName}${employee.employee.lastName} <br>

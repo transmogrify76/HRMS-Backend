@@ -11,7 +11,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MailerModule } from './modules/mailer/mailer.module';
 import { EmployeedetailsModule } from './modules/employeedetails/details.module';
 import { PayrolldetailsModule } from './modules/payrolldetails/payrolldetails.module';
-
+import { UploadPicModule } from './modules/upload-pic/upload-pic.module';
 
 
 @Module({
@@ -32,7 +32,8 @@ import { PayrolldetailsModule } from './modules/payrolldetails/payrolldetails.mo
     EmployeedetailsModule,
     MailerModule,
     PayrollModule,
-    PayrolldetailsModule
+    PayrolldetailsModule,
+    UploadPicModule
   ],
   controllers: [AppController],
   providers: [AppService],
