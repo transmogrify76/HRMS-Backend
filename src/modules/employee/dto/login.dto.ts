@@ -8,7 +8,7 @@ const payload = {
 */
 
 /**
- * @author Supratim Majumder
+ * @author Supratim and Sagnik
  * @description request-body to login. Demo payload is given above the class
  */
 export class LoginDto {
