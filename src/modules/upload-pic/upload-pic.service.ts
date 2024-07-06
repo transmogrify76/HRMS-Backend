@@ -1,5 +1,3 @@
-// image.service.ts
-
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -18,11 +16,11 @@ export class UploadPicService {
         image.filename = originalname;
         image.mimetype = mimetype;
         image.data = buffer;
-        return this.imageRepository.save(image);
+        return await this.imageRepository.save(image);
     }
 
     async getImageById(id: number): Promise<Image> {
-        return this.imageRepository.findOne({ where: { id } });
+        return await this.imageRepository.findOne({ where: { id } });
     }
     
 }

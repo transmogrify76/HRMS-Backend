@@ -84,4 +84,9 @@ export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
     @IsBoolean()
     @IsOptional()
     isActive: boolean;
+
+    @IsString()
+    @IsOptional()
+    resignation_Date:string
+    
 }
