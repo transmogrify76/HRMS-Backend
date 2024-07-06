@@ -86,7 +86,6 @@ export class Employee extends BaseEntity {
   @Column({ name: 'pan_no', length: 20 }) 
   panNo: string;
 
-
   @Column({ name: 'Education_qualification', nullable: true }) 
   Education_qualification: string;
 
@@ -99,7 +98,6 @@ export class Employee extends BaseEntity {
   @Column({ name: 'p_email', nullable: true }) 
   p_email: string;
 
-
   @Column({ name: 'lap_no', nullable: true }) 
   lap_no: string;
 
@@ -111,6 +109,9 @@ export class Employee extends BaseEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @Column({ name: 'resignation_date', nullable: true }) 
+  resignation_Date: string;
 
   @BeforeInsert()
   async setHashedPassword() {

@@ -10,7 +10,7 @@ const payload = {
 */
 
 /**
- * @author Supratim Majumder
+ * @author Supratim and Sagnik
  * @description request-body to create attendance request. Demo payload is given above the class
  */
 export class CreateAttendanceDto {
