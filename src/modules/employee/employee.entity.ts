@@ -19,7 +19,7 @@ export class Employee extends BaseEntity {
   @Column({ name: 'last_name' })
   lastName: string;
 
-  @Column({ unique: true, length: 255 }) // Example length
+  @Column({ length: 255 }) // Example length
   email: string;
 
   @Column({ unique: true, length: 50 }) // Example length
