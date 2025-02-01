@@ -8,7 +8,7 @@ import { Image } from "src/modules/upload-pic/image.entity";
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'mysql',
-  host: '154.41.233.52',
+  host: '147.93.109.22',
   port: 3306,
   entities: [ __dirname + '/../**/*.entity{.ts,.js}',],
   username: 'u179156391_transhrms',
