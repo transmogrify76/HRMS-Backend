@@ -12,7 +12,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   port: 3306,
   entities: [ __dirname + '/../**/*.entity{.ts,.js}',],
   username: 'u179156391_transhrms',
-  password: 'Tgpl@2023',
+  password: 'Tgpl#2020',
   database: 'u179156391_hrms',
   synchronize: false,
   logging: true
