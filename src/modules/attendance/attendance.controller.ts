@@ -45,6 +45,27 @@ export class AttendanceController {
     return result;
   
   }
+  // Update the controller method to accept both month and year
+@Get(':year/:month')
+async getEmployeeDetailsByMonthAndYear(
+  @Param('year') year: number, 
+  @Param('month') month: number
+): Promise<{ employee: Employee, attendances: Attendance[] }[]> {
+  const employeeDetailsWithAttendances = await this.attendanceService.getEmployeeDetailsByMonthAndYear(year, month);
+
+  // Extracting employee details and unique attendances
+  const result: { employee: Employee, attendances: Attendance[] }[] = [];
+  const uniqueEmployeesMap = new Map<number, Employee>();
+  employeeDetailsWithAttendances.forEach(({ employee, attendances }) => {
+    if (!uniqueEmployeesMap.has(employee.empId)) {
+      uniqueEmployeesMap.set(employee.empId, employee);
+      result.push({ employee, attendances });
+    }
+  });
+
+  return result;
+}
+
 
   @Patch(':id')
   async updateById(

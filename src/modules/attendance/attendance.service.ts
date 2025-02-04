@@ -114,4 +114,37 @@ export class AttendanceService {
     const result: { employee: Employee, attendances: Attendance[] }[] = Array.from(attendanceMap.values());
     return result;
 }
+async getEmployeeDetailsByMonthAndYear(year: number, month: number): Promise<{ employee: Employee, attendances: Attendance[] }[]> {
+  // Ensure the month and year are valid
+  if (month < 1 || month > 12) {
+    throw new Error('Invalid month');
+  }
+
+  // Define the start and end dates for the specified year and month
+  const startDate = new Date(year, month - 1, 1, 0, 0, 0); // Start of the month
+  const endDate = new Date(year, month, 0, 23, 59, 59); // End of the month (last day)
+
+  // Fetch attendances within the specified month and year range
+  const attendances = await this.attendanceRepository.find({
+    where: {
+      checkIn: Between(startDate, endDate),
+    },
+    relations: ['employee'], // Ensure related employees are loaded
+  });
+
+  // Grouping attendances by employee
+  const attendanceMap = new Map<number, { employee: Employee, attendances: Attendance[] }>();
+  attendances.forEach(attendance => {
+    const empId = attendance.employee.empId;
+    if (!attendanceMap.has(empId)) {
+      attendanceMap.set(empId, { employee: attendance.employee, attendances: [] });
+    }
+    attendanceMap.get(empId).attendances.push(attendance);
+  });
+
+  // Return the grouped results
+  const result: { employee: Employee, attendances: Attendance[] }[] = Array.from(attendanceMap.values());
+  return result;
+}
+
 }
